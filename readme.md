@@ -2,7 +2,7 @@
 
 Owl Shell is a shell that you can startto use it very easily. I want to make a good-looking shell and lower the threshold for using the command line.
 
-You can donate me at
+You can donate me [here](https://afdian.net/a/jasonmo666)
 
 # Commands
 
