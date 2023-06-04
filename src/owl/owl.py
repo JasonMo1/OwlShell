@@ -42,6 +42,9 @@ class Owlshell_Main(object):
                         path = commands.file_operation.owl_cd(path, inptcommand[1])
                         print("")
 
+                    elif inptcommand[0] == 'owldbg_err':
+                        owl_errors(int(inptcommand[1]))
+
                     else:
                         runcommand = commandlist[inptcommand[0]]
                         eval(runcommand)
