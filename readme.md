@@ -12,7 +12,7 @@ ls `<-h> <-dirsize>`
 
 mkdir `</>`
 
-mkfile `<>`
+mkfile `</>`
 
 # Authors
 
