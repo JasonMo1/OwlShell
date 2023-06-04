@@ -1,0 +1,5 @@
+"2023-06-04 19:34:37
+    [31mOwl shell error 200: Path not exists[0m
+""2023-06-04 19:36:50
+    [31mOwl shell error 000: Command not exists[0m
+"

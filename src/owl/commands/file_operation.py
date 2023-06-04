@@ -147,3 +147,17 @@ def owl_mkdir(path:str, name:str):
 def owl_mkfile(path:str, name:str):
     mkpath = mkpath = path+"\\"+name
     open(mkpath, 'w')
+
+def owl_rmdir(path:str):
+
+    for i in os.listdir(path):
+        # 如果是文件夹就递归下去
+        if os.path.isdir(os.path.join(path,i)):
+            owl_rmdir(os.path.join(path,i))
+        # Delete file
+        else:
+            os.remove(os.path.join(path,i))
+    os.rmdir(path)
+
+def owl_rmfile(path:str):
+    os.remove(path)
