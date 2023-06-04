@@ -8,7 +8,11 @@ You can donate me at
 
 cd `<path>`
 
-ls </>
+ls `<-h> <-dirsize>`
+
+mkdir `</>`
+
+mkfile `<>`
 
 # Authors
 
