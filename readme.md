@@ -4,7 +4,7 @@ Owl Shell is a shell that you can startto use it very easily. I want to make a g
 
 You can donate me [here](https://afdian.net/a/jasonmo666)
 
-# Commands
+## Commands
 
 cd `<path>`
 
@@ -20,13 +20,33 @@ rmfile `<path>`
 
 owldbg_err `</>`
 
-# Authors
+## Authors
 
 `JasonMo`				`jasonmo2009@hotmail.com`
 
-# Sponsors
+## Mirrors
 
-# Thanks
+github (Main):
+
+[JasonMo1/OwlShell](https://github.com/JasonMo1/OwlShell)
+
+`git clone https://github.com/JasonMo1/OwlShell.git`
+
+gitcode:
+
+[Jason Mo/OwlShell](https://gitcode.net/weixin_68426319/OwlShell)
+
+`git clone https://gitcode.net/weixin_68426319/OwlShell.git`
+
+gitee:
+
+[jasonmo66/OwlShell](https://gitee.com/jasonmo66/OwlShell)
+
+`git clone https://gitee.com/jasonmo66/OwlShell.git`
+
+## Sponsors
+
+## Thanks
 
 `CSDN@1学习者1`
 
