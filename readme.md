@@ -6,6 +6,8 @@ You can donate me [here](https://afdian.net/a/jasonmo666)
 
 ## Commands
 
+exit `<exit_code>`
+
 cd `<path>`
 
 ls `<-h> <-dirsize>`
@@ -18,7 +20,9 @@ rmdir `<path>`
 
 rmfile `<path>`
 
-owldbg_err `</>`
+owldbg_err `<error_code>`
+
+owldbg_eval `<run_command>`
 
 ## Authors
 

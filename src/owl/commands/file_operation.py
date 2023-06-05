@@ -15,12 +15,15 @@ def owl_cd(oldpath:str, newpath:str):
 
 
     if os.path.exists(newpath):
+        os.chdir(newpath)
         return newpath
     else: 
         owl_errors(200)
         return oldpath
     
-def owl_ls(path:str, inptcommand:list):
+def owl_ls(inptcommand:list):
+
+    path = os.getcwd()
 
     if os.path.exists(path):
         if '-dirsize' in inptcommand:
@@ -140,15 +143,19 @@ def owl_ls_timepassed(time1):
 
     return passedtime
 
-def owl_mkdir(path:str, name:str):
+def owl_mkdir(name:str):
+    path = os.getcwd()
     mkpath = path+"\\"+name
     os.mkdir(mkpath)
 
-def owl_mkfile(path:str, name:str):
+def owl_mkfile(name:str):
+    path = os.getcwd()
     mkpath = mkpath = path+"\\"+name
     open(mkpath, 'w')
 
-def owl_rmdir(path:str):
+def owl_rmdir():
+
+    path = os.getcwd()
 
     for i in os.listdir(path):
         # 如果是文件夹就递归下去
@@ -159,5 +166,6 @@ def owl_rmdir(path:str):
             os.remove(os.path.join(path,i))
     os.rmdir(path)
 
-def owl_rmfile(path:str):
+def owl_rmfile():
+    path = os.getcwd()
     os.remove(path)
