@@ -1,8 +1,8 @@
 # Written by JasonMo on 2023.06.02
 # Copyright (c) 2021-2025 JasonMo All Rights Reserved
 
-import sys
 import os
+import sys
 import getpass
 import socket
 from colorama import *
@@ -18,6 +18,9 @@ class Owlshell_Main(object):
         
         # colorama init
         init(autoreset=True)
+
+        self.owl_init_plugins(self=Owlshell_Main)
+        print(commandlist)
 
         usrname = getpass.getuser()
         pcname = socket.gethostname()
@@ -51,7 +54,12 @@ class Owlshell_Main(object):
                         owl_errors(int(inptcommand[1]))
 
                     elif inptcommand[0] == 'owldbg_eval':
-                        eval(inptcommand[1])
+                        
+                        evalcommand = consolinput.split()
+                        
+                        print('')
+                        eval(evalcommand[1])
+                        print('')
 
                     else:
                         runcommand = commandlist[inptcommand[0]]
@@ -61,7 +69,35 @@ class Owlshell_Main(object):
                 elif inptcommand[0] not in commandlist.keys():
                     owl_errors(000)
 
+    def owl_init_plugins(self):
+
+        owlpath = os.path.dirname(os.path.abspath(__file__))
+        plugpath = os.listdir(owlpath+'\\plugins')
+        plugdirs = []
+        
+        for filepath in plugpath:
+            pathname = os.path.join(owlpath+'\\plugins', filepath)
+
+            if not os.path.isfile(pathname):
+                plugdirs.append(pathname)
+
+
+
+            plugname = os.path.split(pathname)[-1]
+            plugmain = plugname+'_main'
+            plugcmd = plugname+'_commandlist'
+            plugpath = owlpath+'\\plugins\\'+plugname
+            cmdupdtstr = 'commandlist.update('+plugcmd+')'
+
+            sys.path.append(plugpath)
+            
+            exec('from '+plugmain+' import *')
+            eval(cmdupdtstr)
+
+
+        
+
 
 
 if __name__ == "__main__":
-    Owlshell_Main.shellmain(self=None)
+    Owlshell_Main.shellmain(self=Owlshell_Main)

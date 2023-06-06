@@ -5,8 +5,11 @@ import os
 import sys
 import time
 import datetime
+from colorama import *
 from prettytable import *
+
 sys.path.append("..") 
+init(autoreset=True)
 
 from owl_errors import *
 
@@ -81,8 +84,8 @@ def owl_ls_getobjarg(path:str, dirsize:bool=False):
         objctimes = time.strftime("%Y-%m-%d %X", time.localtime(state[-1]))
         objmtimes = time.strftime("%Y-%m-%d %X", time.localtime(state[-2]))
 
-        objctime = str(owl_ls_timepassed(objctimes))
-        objmtime = str(owl_ls_timepassed(objmtimes))
+        objctime = str(owl_ls_timepassed_normal(objctimes))
+        objmtime = str(owl_ls_timepassed_normal(objmtimes))
         
         objname = filepath
         objsize = ("%d" %state[-4])
@@ -113,7 +116,7 @@ def owl_ls_getdirsize(dir:str):
         size += sum([os.path.getsize(os.path.join(root, name)) for name in files])
     return size
 
-def owl_ls_timepassed(time1):
+def owl_ls_timepassed_normal(time1):
     
     nowtime = datetime.datetime.now() 
     time2 = datetime.datetime.strptime(time1, "%Y-%m-%d %H:%M:%S")
@@ -138,6 +141,38 @@ def owl_ls_timepassed(time1):
         passedtime = str(passedhours)+' hours ago'
     elif passedmins > 0:
         passedtime = str(passedmins)+' minutes ago'
+    else:
+        passedtime = 'Just now'
+
+    return passedtime
+
+def owl_ls_timepassed_corlor(time1):
+
+    # Colorful time output
+
+    nowtime = datetime.datetime.now() 
+    time2 = datetime.datetime.strptime(time1, "%Y-%m-%d %H:%M:%S")
+
+    passedsecs = (nowtime - time2).seconds
+    passeddays = (nowtime - time2).days
+    passedmonths = int(passeddays/30)
+    passedyears = int(passedmonths/12)
+    passedweeks = int(passeddays/7)
+    passedmins = int(passedsecs/60)
+    passedhours = int(passedmins/60)
+
+    if passedyears > 0:
+        passedtime = Fore.RED+str(passedyears)+' years ago'+Fore.RESET
+    elif passedmonths > 0:
+        passedtime = Fore.LIGHTRED_EX+str(passedmonths)+' months ago'+Fore.RESET
+    elif passedweeks > 0:
+        passedtime = Fore.YELLOW+str(passedweeks)+' weeks ago'+Fore.RESET
+    elif passeddays > 0:
+        passedtime = Fore.LIGHTYELLOW_EX+str(passeddays)+' days ago'+Fore.RESET
+    elif passedhours > 0:
+        passedtime = Fore.GREEN+str(passedhours)+' hours ago'+Fore.RESET
+    elif passedmins > 0:
+        passedtime = Fore.LIGHTGREEN_EX+str(passedmins)+' minutes ago'+Fore.RESET
     else:
         passedtime = 'Just now'
 

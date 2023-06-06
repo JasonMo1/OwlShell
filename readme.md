@@ -22,7 +22,7 @@ rmfile `<path>`
 
 owldbg_err `<error_code>`
 
-owldbg_eval `<run_command>`
+owldbg_eval `<"run_command">`
 
 ## Authors
 
