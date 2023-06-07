@@ -19,16 +19,43 @@ class Owlshell_Main(object):
         # colorama init
         init(autoreset=True)
 
-        self.owl_init_plugins(self=Owlshell_Main)
-        print(commandlist)
+        # load plugins
+        owlpath = os.path.dirname(os.path.abspath(__file__))
+        plugpath = os.listdir(owlpath+'\\plugins')
+        plugdirs = []  # this is for debug
+        
+        for filepath in plugpath:
+            pathname = os.path.join(owlpath+'\\plugins', filepath)
 
+            if not os.path.isfile(pathname):
+                plugdirs.append(pathname)
+
+            plugname = os.path.split(pathname)[-1]
+            plugmain = plugname+'_main'
+            plugcmd = plugmain+'.'+plugname+'_commandlist'
+            plugpath = owlpath+'\\plugins\\'+plugname
+            cmdupdtstr = 'commandlist.update('+plugcmd+')'
+
+            sys.path.append(plugpath)
+            
+            exec('import '+plugmain+'')
+            eval(cmdupdtstr)
+
+        # feedback commandlist
+        owl_write_cache(str(commandlist))
+
+
+        # init text on the command line
         usrname = getpass.getuser()
         pcname = socket.gethostname()
         path = os.getcwd()
 
-        print(" 🦉 Thank you for using Owl shell!")
-        print("    You can donate me at https://afdian.net/a/jasonmo666")
-        print("    Our github is on https://github.com/JasonMo1/OwlShell\n\n")
+        # Look at my owl!
+        # {🦉}
+
+        print(" {O,O}   Thank you for using Owl shell!")
+        print("./)_)    You can donate me at https://afdian.net/a/jasonmo666")
+        print("  \" \"    Our github is on https://github.com/JasonMo1/OwlShell\n\n")
 
         while 1:
             print(Fore.CYAN+"╭──["+Fore.GREEN+pcname+Fore.RESET+Fore.CYAN+"◍"+Fore.GREEN+usrname+Fore.CYAN+"]")
@@ -50,24 +77,13 @@ class Owlshell_Main(object):
                         path = commands.file_operation.owl_cd(path, inptcommand[1])
                         print("")
 
-                    elif inptcommand[0] == 'owldbg_err':
-                        owl_errors(int(inptcommand[1]))
-
-                    elif inptcommand[0] == 'owldbg_eval':
-                        
-                        evalcommand = consolinput.split()
-                        
-                        print('')
-                        eval(evalcommand[1])
-                        print('')
-
                     else:
                         runcommand = commandlist[inptcommand[0]]
                         eval(runcommand)
                         print("")
                         
                 elif inptcommand[0] not in commandlist.keys():
-                    owl_errors(000)
+                    owl_errors(000, 'e')
 
     def owl_init_plugins(self):
 
@@ -81,23 +97,16 @@ class Owlshell_Main(object):
             if not os.path.isfile(pathname):
                 plugdirs.append(pathname)
 
-
-
             plugname = os.path.split(pathname)[-1]
             plugmain = plugname+'_main'
-            plugcmd = plugname+'_commandlist'
+            plugcmd = plugmain+'.'+plugname+'_commandlist'
             plugpath = owlpath+'\\plugins\\'+plugname
             cmdupdtstr = 'commandlist.update('+plugcmd+')'
 
             sys.path.append(plugpath)
             
-            exec('from '+plugmain+' import *')
+            exec('import '+plugmain+'')
             eval(cmdupdtstr)
-
-
-        
-
-
 
 if __name__ == "__main__":
     Owlshell_Main.shellmain(self=Owlshell_Main)

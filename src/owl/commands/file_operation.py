@@ -7,12 +7,9 @@ import time
 import datetime
 from colorama import *
 from prettytable import *
-
 sys.path.append("..") 
 init(autoreset=True)
-
 from owl_errors import *
-
 
 def owl_cd(oldpath:str, newpath:str):
 
@@ -21,7 +18,7 @@ def owl_cd(oldpath:str, newpath:str):
         os.chdir(newpath)
         return newpath
     else: 
-        owl_errors(200)
+        owl_errors(200, 'e')
         return oldpath
     
 def owl_ls(inptcommand:list):
@@ -37,10 +34,9 @@ def owl_ls(inptcommand:list):
         else:
             dirsize = False
             owl_ls_createtable(path, dirsize)
-        
 
     else: 
-        owl_errors(201)
+        owl_errors(201, 'e')
 
 def owl_ls_createtable(path:str, dirsize:bool=False):
     table = PrettyTable(['#','name','type', 'size', 'modified','created'])
